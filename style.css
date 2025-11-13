@@ -1682,3 +1682,9 @@ button:focus {
     display: none;
   }
 }
+.img-fluid {
+    max-width: 120px; 
+    height: auto;
+    display: block;
+}
+
