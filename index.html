@@ -44,8 +44,10 @@
 
     <link rel="stylesheet" href="style.css" />
   </head>
+  <!-- <body> -->
+  <!-- Elegant Floating Elements -->
+
   <body>
-    <!-- Elegant Floating Elements -->
     <div class="floating-elements">
       <div class="float-element" style="top: 10%; left: 5%">
         <i class="fas fa-heart"></i>
@@ -60,8 +62,6 @@
         <i class="fas fa-crown"></i>
       </div>
     </div>
-
-    <!-- Header -->
     <header id="header">
       <div class="container">
         <div class="header-content">
@@ -69,18 +69,17 @@
             <img
               src="christo bridal logo.png"
               class="img-fluid"
-              style="height: 60px; width: 60px"
               alt="Christo Logo"
             />
           </div>
 
           <nav class="nav-menu" id="navMenu">
-            <a href="#home" class="nav-link active">Home</a>
+            <a href="#home" class="nav-link">Home</a>
             <a href="#about" class="nav-link">About Us</a>
             <a href="#services" class="nav-link">Services</a>
             <a href="#portfolio" class="nav-link">Portfolio</a>
             <a href="#testimonials" class="nav-link">Testimonials</a>
-            <a href="#contact" class="nav-link cta-btn">Contact</a>
+            <a href="#contact" class="nav-link">Contact</a>
           </nav>
 
           <button class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -91,7 +90,6 @@
         </div>
       </div>
     </header>
-
     <!-- Hero Section -->
     <section id="home" class="hero">
       <div class="hero-overlay"></div>
@@ -158,7 +156,7 @@
         <p>Scroll Down</p>
       </div>
     </section>
-
+    <!-- About Section -->
     <!-- About Section -->
     <section id="about" class="about-section">
       <div class="container">
@@ -616,6 +614,7 @@
     </section>
 
     <!-- Testimonials Section -->
+    <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials-section">
       <div class="container">
         <div class="section-header">
@@ -625,13 +624,15 @@
         </div>
 
         <div class="testimonials-carousel">
-          <div class="testimonial-track">
+          <div class="testimonial-track" id="testimonialTrack">
+            <!-- Card 1 -->
             <div class="testimonial-card">
               <div class="testimonial-header">
                 <div class="testimonial-image">
                   <img
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
-                    alt="Blessing"
+                    alt="Cecilia"
+                    loading="lazy"
                   />
                 </div>
                 <div class="testimonial-info">
@@ -658,12 +659,14 @@
               </div>
             </div>
 
+            <!-- Card 2 -->
             <div class="testimonial-card">
               <div class="testimonial-header">
                 <div class="testimonial-image">
                   <img
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
-                    alt="David"
+                    alt="Mrs. Amina"
+                    loading="lazy"
                   />
                 </div>
                 <div class="testimonial-info">
@@ -690,12 +693,14 @@
               </div>
             </div>
 
+            <!-- Card 3 -->
             <div class="testimonial-card">
               <div class="testimonial-header">
                 <div class="testimonial-image">
                   <img
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
-                    alt="Grace"
+                    alt="Grace Adejoh"
+                    loading="lazy"
                   />
                 </div>
                 <div class="testimonial-info">
@@ -721,12 +726,14 @@
               </div>
             </div>
 
+            <!-- Card 4 -->
             <div class="testimonial-card">
               <div class="testimonial-header">
                 <div class="testimonial-image">
                   <img
                     src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80"
-                    alt="Michael"
+                    alt="Michael & Faith"
+                    loading="lazy"
                   />
                 </div>
                 <div class="testimonial-info">
@@ -754,18 +761,26 @@
             </div>
           </div>
 
+          <!-- Carousel Controls – Always visible, including on mobile -->
           <div class="carousel-controls">
-            <button class="carousel-btn prev" id="prevBtn">
+            <button
+              class="carousel-btn prev"
+              id="prevBtn"
+              aria-label="Previous testimonial"
+            >
               <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="carousel-btn next" id="nextBtn">
+            <button
+              class="carousel-btn next"
+              id="nextBtn"
+              aria-label="Next testimonial"
+            >
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
       </div>
     </section>
-
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
       <div class="container">
@@ -798,7 +813,7 @@
                 </div>
                 <div class="contact-text">
                   <h4>Phone</h4>
-                  <p><a href="tel:+2347064353245">+234 706 4353 245</a></p>
+                  <p><a href="tel:+2347064353245">+234 706 435 3245</a></p>
                 </div>
               </div>
 
@@ -809,9 +824,9 @@
                 <div class="contact-text">
                   <h4>Email</h4>
                   <p>
-                    <a href="mailto:dajilichristianaojone@gmail.com"
-                      >dajilichristianaojone@gmail.com</a
-                    >
+                    <a href="mailto:dajilichristianaojone@gmail.com">
+                      dajilichristianaojone@gmail.com
+                    </a>
                   </p>
                 </div>
               </div>
@@ -832,7 +847,7 @@
                 </div>
                 <div class="contact-text">
                   <h4>Working Hours</h4>
-                  <p>Mon - Sat: 9:00 AM - 6:00 PM</p>
+                  <p>Mon – Sat: 9:00 AM – 6:00 PM</p>
                   <p>Sunday: By Appointment</p>
                 </div>
               </div>
@@ -843,16 +858,21 @@
               <div class="social-icons">
                 <a
                   href="https://www.facebook.com/christiana.dajili"
+                  target="_blank"
                   aria-label="Facebook"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
+                >
+                  <i class="fab fa-facebook-f"></i>
+                </a>
                 <a
                   href="https://www.instagram.com/christianadajili"
+                  target="_blank"
                   aria-label="Instagram"
-                  ><i class="fab fa-instagram"></i
-                ></a>
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
                 <a
                   href="https://wa.me/2347064353245?text=Hi%20Christo%20Bridal%2C%20I%20got%20your%20contact%20from%20your%20website%20and%20will%20love%20you%20to%20help%20plan%20my%20event"
+                  target="_blank"
                   aria-label="WhatsApp"
                 >
                   <i class="fab fa-whatsapp"></i>
@@ -890,7 +910,11 @@
                 Not sure where to start? Book a free consultation session to
                 discuss your event ideas and get expert recommendations!
               </p>
-              <a href="https://bit.ly/christo-bridal" class="btn btn-outline">
+              <a
+                href="https://bit.ly/christo-bridal"
+                target="_blank"
+                class="btn btn-outline"
+              >
                 <i class="fas fa-file-alt"></i> Contact Us
               </a>
             </div>
@@ -898,7 +922,6 @@
         </div>
       </div>
     </section>
-
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
