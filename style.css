@@ -1392,7 +1392,7 @@ section {
 }
 
 /* Single source of truth for contact items */
-.contact-item {
+/* .contact-item {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-md);
@@ -1422,7 +1422,7 @@ section {
   flex: 1;
   min-width: 0; /* Critical for wrapping */
 }
-
+ */
 .contact-text h4 {
   font-size: 1rem;
   color: var(--navy);
@@ -2035,3 +2035,109 @@ body {
   padding-right: var(--spacing-lg);
   box-sizing: border-box;
 }
+/* ============ CRITICAL FIX: CONTACT SECTION OVERFLOW ============ */
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--light-yellow);
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+  
+  /* These 4 lines are the real fix */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;           /* Prevents any child from leaking */
+}
+
+.contact-icon {
+  flex-shrink: 0;             /* Icon never shrinks */
+  width: 50px;
+  height: 50px;
+  min-width: 50px;            /* Prevents shrinking */
+}
+
+.contact-text {
+  flex: 1;
+  min-width: 0;               /* This allows text to wrap properly */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Force text to wrap and never overflow */
+.contact-text h4,
+.contact-text p,
+.contact-text a {
+  width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Mobile-specific override - stack icon on top if needed */
+@media (max-width: 480px) {
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: var(--spacing-sm);
+  }
+
+  .contact-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .contact-text h4 {
+    font-size: 1.1rem;
+    margin-top: var(--spacing-xs);
+  }
+}
+
+/* ============ GENERAL MOBILE OVERFLOW SAFETY (Add this) ============ */
+@media (max-width: 768px) {
+  /* Force everything to respect viewport */
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .container {
+    padding-left: var(--spacing-md) !important;
+    padding-right: var(--spacing-md) !important;
+  }
+
+  /* Fix any decorative overflow in About section */
+  .image-decoration {
+    display: none !important;   /* Safest: hide the yellow square on mobile */
+  }
+
+  /* Ensure CTA boxes don't overflow */
+  .cta-box {
+    padding: var(--spacing-md);
+  }
+
+  /* Fix testimonial cards */
+  .testimonial-card {
+    min-width: calc(100% - 40px) !important;
+    margin: 0 20px !important;
+  }
+}
+
+/* Ultra-safe final rule (nuclear option if still seeing scroll) */
+* {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+/* TEMPORARY DEBUG - REMOVE AFTER CONFIRMING FIX */
+/* * {
+  outline: 1px solid red !important;
+}
+body {
+  overflow-x: hidden !important;
+} */
