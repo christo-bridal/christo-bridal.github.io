@@ -6,12 +6,12 @@
 /* ===== CSS VARIABLES ===== */
 :root {
   /* Yellow Theme Colors */
-  --primary-yellow: #FFD700;
-  --gold: #FDB94E;
-  --dark-gold: #E6A84A;
-  --light-yellow: #FFF9E6;
-  --cream: #FFF8DC;
-  
+  --primary-yellow: #ffd700;
+  --gold: #fdb94e;
+  --dark-gold: #e6a84a;
+  --light-yellow: #fff9e6;
+  --cream: #fff8dc;
+
   /* Complementary Colors */
   --navy: #1a1f3a;
   --dark-navy: #0f1320;
@@ -20,23 +20,23 @@
   --gray: #6b7280;
   --light-gray: #f3f4f6;
   --border-gray: #e5e7eb;
-  
+
   /* Accent Colors */
-  --accent-pink: #FFB6C1;
+  --accent-pink: #ffb6c1;
   --accent-purple: #9b87f5;
   --success: #10b981;
-  
+
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(255, 215, 0, 0.1);
   --shadow-md: 0 4px 20px rgba(255, 215, 0, 0.15);
   --shadow-lg: 0 10px 40px rgba(255, 215, 0, 0.2);
   --shadow-xl: 0 20px 60px rgba(255, 215, 0, 0.25);
-  
+
   /* Typography */
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Poppins', sans-serif;
-  --font-script: 'Dancing Script', cursive;
-  
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Poppins", sans-serif;
+  --font-script: "Dancing Script", cursive;
+
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -44,14 +44,14 @@
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
-  
+
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 50%;
-  
+
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-base: 0.3s ease;
@@ -59,7 +59,9 @@
 }
 
 /* ===== RESET & BASE STYLES ===== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -75,9 +77,15 @@ body {
   color: var(--navy);
   background: var(--white);
   line-height: 1.7;
-  overflow-x: hidden;
+  max-width: 100%; /* FIX: Ensures no horizontal overflow */
+  overflow-x: hidden; /* FIX: Ensures no horizontal overflow */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* FIX: Body class to prevent scrolling when menu is open */
+body.menu-open {
+  overflow: hidden;
 }
 
 img {
@@ -131,14 +139,27 @@ button {
   animation: float 6s ease-in-out infinite;
 }
 
-.float-element:nth-child(1) { animation-delay: 0s; }
-.float-element:nth-child(2) { animation-delay: 1.5s; }
-.float-element:nth-child(3) { animation-delay: 3s; }
-.float-element:nth-child(4) { animation-delay: 4.5s; }
+.float-element:nth-child(1) {
+  animation-delay: 0s;
+}
+.float-element:nth-child(2) {
+  animation-delay: 1.5s;
+}
+.float-element:nth-child(3) {
+  animation-delay: 3s;
+}
+.float-element:nth-child(4) {
+  animation-delay: 4.5s;
+}
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-30px) rotate(10deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(10deg);
+  }
 }
 
 /* ===== HEADER ===== */
@@ -152,6 +173,7 @@ button {
   box-shadow: var(--shadow-sm);
   z-index: 1000;
   transition: var(--transition-base);
+  height: 70px; /* Use consistent height for mobile calculation */
 }
 
 #header.scrolled {
@@ -164,6 +186,7 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-sm) 0;
+  height: 100%;
 }
 
 .brand {
@@ -187,8 +210,13 @@ button {
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .brand-text {
@@ -230,7 +258,7 @@ button {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -269,22 +297,42 @@ button {
   display: none;
 }
 
-/* Mobile Menu Toggle */
+/* Mobile Menu Toggle (Hamburger) - FIX START */
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
-  padding: 8px;
+  width: 35px;
+  height: 35px;
+  background: none;
+  border: none;
   cursor: pointer;
+  z-index: 10001;
 }
 
 .mobile-menu-toggle span {
-  width: 25px;
+  width: 28px;
   height: 3px;
   background: var(--gold);
   border-radius: 3px;
   transition: var(--transition-base);
+  transform-origin: center;
 }
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+/* Mobile Menu Toggle (Hamburger) - FIX END */
 
 /* ===== HERO SECTION ===== */
 .hero {
@@ -293,21 +341,33 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--light-yellow) 0%, var(--cream) 50%, var(--white) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--light-yellow) 0%,
+    var(--cream) 50%,
+    var(--white) 100%
+  );
   overflow: hidden;
   padding-top: 100px;
 }
 
 .hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(253, 185, 78, 0.1) 0%, transparent 50%);
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(255, 215, 0, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(253, 185, 78, 0.1) 0%,
+      transparent 50%
+    );
   z-index: 1;
 }
 
@@ -514,13 +574,24 @@ button {
 }
 
 @keyframes scroll {
-  0% { top: 10px; opacity: 1; }
-  100% { top: 30px; opacity: 0; }
+  0% {
+    top: 10px;
+    opacity: 1;
+  }
+  100% {
+    top: 30px;
+    opacity: 0;
+  }
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-10px); }
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
 }
 
 .scroll-indicator p {
@@ -544,11 +615,21 @@ button {
   }
 }
 
-.fade-in-up[data-delay="100"] { animation-delay: 0.1s; }
-.fade-in-up[data-delay="200"] { animation-delay: 0.2s; }
-.fade-in-up[data-delay="300"] { animation-delay: 0.3s; }
-.fade-in-up[data-delay="400"] { animation-delay: 0.4s; }
-.fade-in-up[data-delay="500"] { animation-delay: 0.5s; }
+.fade-in-up[data-delay="100"] {
+  animation-delay: 0.1s;
+}
+.fade-in-up[data-delay="200"] {
+  animation-delay: 0.2s;
+}
+.fade-in-up[data-delay="300"] {
+  animation-delay: 0.3s;
+}
+.fade-in-up[data-delay="400"] {
+  animation-delay: 0.4s;
+}
+.fade-in-up[data-delay="500"] {
+  animation-delay: 0.5s;
+}
 
 /* ===== SECTION STYLES ===== */
 section {
@@ -585,7 +666,13 @@ section {
 .title-divider {
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, transparent, var(--primary-yellow), var(--gold), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-yellow),
+    var(--gold),
+    transparent
+  );
   margin: var(--spacing-md) auto;
   border-radius: 2px;
 }
@@ -694,7 +781,6 @@ section {
   line-height: 1.8;
   margin-bottom: var(--spacing-md);
 }
-
 .about-features {
   margin: var(--spacing-xl) 0;
 }
@@ -707,10 +793,37 @@ section {
   background: var(--light-yellow);
   border-radius: var(--radius-md);
   transition: var(--transition-base);
+  /* Ensure it never overflows */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* On small screens, allow content to wrap */
+@media (max-width: 480px) {
+  .feature-item {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+
+  .feature-icon {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .feature-content h4 {
+    font-size: 1rem;
+  }
+
+  .feature-content p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
 }
 
 .feature-item:hover {
-  transform: translateX(10px);
+  transform: translateX(5px); /* reduced for mobile safety */
   box-shadow: var(--shadow-md);
 }
 
@@ -727,6 +840,11 @@ section {
   font-size: 1.5rem;
 }
 
+.feature-content {
+  flex: 1;
+  min-width: 0; /* Critical: prevents overflow */
+}
+
 .feature-content h4 {
   font-size: 1.1rem;
   color: var(--navy);
@@ -737,17 +855,47 @@ section {
   font-size: 0.9rem;
   color: var(--gray);
   margin: 0;
+  line-height: 1.6;
+}
+/* Ensure feature text never overflows */
+.feature-content h4,
+.feature-content p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
+/* Improve layout on very small screens */
+@media (max-width: 480px) {
+  .feature-content h4 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .feature-content p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  /* Optional: Reduce side padding on feature items */
+  .feature-item {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+}
 /* ===== SERVICES SECTION ===== */
 .services-section {
-  background: linear-gradient(135deg, var(--light-yellow) 0%, var(--white) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--light-yellow) 0%,
+    var(--white) 100%
+  );
   position: relative;
   overflow: hidden;
 }
 
 .services-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -776,7 +924,7 @@ section {
 }
 
 .service-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -926,9 +1074,10 @@ section {
   box-shadow: var(--shadow-md);
 }
 
+/* FIX: Use 250px min-width for portfolio grid items for better flow */
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--spacing-lg);
 }
 
@@ -968,7 +1117,11 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(253, 185, 78, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.9),
+    rgba(253, 185, 78, 0.9)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1022,9 +1175,14 @@ section {
   font-weight: 500;
 }
 
-/* ===== TESTIMONIALS SECTION ===== */
+/* ===== TESTIMONIALS SECTION (FIXED Layout) ===== */
 .testimonials-section {
-  background: linear-gradient(135deg, var(--cream) 0%, var(--light-yellow) 50%, var(--white) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--cream) 0%,
+    var(--light-yellow) 50%,
+    var(--white) 100%
+  );
   position: relative;
   overflow: hidden;
 }
@@ -1034,30 +1192,70 @@ section {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--spacing-xl) 0;
+  overflow: hidden; /* FIX: Allows JS translation without external scrollbar */
+}
+.testimonials-carousel {
+  width: 100%;
 }
 
 .testimonial-track {
   display: flex;
   gap: var(--spacing-xl);
+  transition: transform 0.4s ease; /* FIX: Use 0.4s ease for fluid motion */
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
+  scroll-behavior: smooth;
+  margin: 0 -16px; /* Compensate for container padding if needed */
 }
 
 .testimonial-track::-webkit-scrollbar {
   display: none;
 }
-
+/* 
 .testimonial-card {
-  flex: 0 0 calc(50% - var(--spacing-lg));
+  FIX: Ensure specific width for reliable JS scrolling
+  flex: 0 0 320px;
+  margin-right: var(--spacing-xl); Use consistent theme spacing as the gap
   background: var(--white);
   padding: var(--spacing-xl);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   position: relative;
   transition: var(--transition-base);
+} */
+/* .testimonial-card {
+  flex: 0 0 100%; Full width on mobile
+  max-width: 100%;
+  margin-right: 0;
+  scroll-snap-align: start;
+} */
+.testimonial-card {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  max-width: 100%;
+  margin: 0 !important; /* Override any margin that causes overflow */
+}
+
+/* Tablet and up: show partial next card for visual cue */
+@media (min-width: 769px) {
+  .testimonial-card {
+    flex: 0 0 calc(33.333% - 2rem); /* ~3 per row */
+    margin-right: var(--spacing-xl);
+  }
+}
+
+/* Keep desktop as before */
+@media (min-width: 1025px) {
+  .testimonial-card {
+    flex: 0 0 320px;
+    margin-right: var(--spacing-xl);
+  }
 }
 
 .testimonial-card:hover {
@@ -1193,7 +1391,27 @@ section {
 .contact-details {
   margin-bottom: var(--spacing-xl);
 }
+/* Ensure contact info never overflows on mobile */
+.contact-text h4,
+.contact-text p,
+.contact-text a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.5;
+}
 
+/* Optional: Reduce font size slightly on very small screens */
+@media (max-width: 480px) {
+  .contact-text h4 {
+    font-size: 0.95rem;
+  }
+
+  .contact-text p,
+  .contact-text a {
+    font-size: 0.9rem;
+  }
+}
 .contact-item {
   display: flex;
   gap: var(--spacing-md);
@@ -1207,6 +1425,24 @@ section {
 .contact-item:hover {
   transform: translateX(10px);
   box-shadow: var(--shadow-md);
+}
+/* ss */
+.contact-item {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--light-yellow);
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+  align-items: flex-start; /* Important for multi-line text */
+  width: 100%; /* Prevent implicit width overflow */
+  box-sizing: border-box;
+}
+
+.contact-text {
+  flex: 1;
+  min-width: 0; /* Critical — allows text to wrap within flex item */
 }
 
 .contact-icon {
@@ -1243,6 +1479,43 @@ section {
 .contact-text a:hover {
   color: var(--primary-yellow);
   text-decoration: underline;
+}
+
+/* Allow long words like emails and URLs to break */
+.contact-text a,
+.contact-text p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word; /* Optional: more aggressive break */
+  hyphens: auto;
+}
+/* Fix contact section overflow on mobile */
+@media (max-width: 900px) {
+  .contact-content {
+    grid-template-columns: 1fr !important;
+    gap: var(--spacing-xl);
+  }
+
+  .contact-info,
+  .contact-cta {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cta-box {
+    width: 100%;
+  }
+
+  /* Ensure social/icons don’t overflow */
+  .social-icons {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: var(--spacing-md);
+  }
+
+  .social-icons a {
+    flex: 0 0 auto;
+  }
 }
 
 .social-links h4 {
@@ -1332,13 +1605,18 @@ section {
 }
 
 .footer::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-yellow), var(--gold), var(--primary-yellow));
+  background: linear-gradient(
+    90deg,
+    var(--primary-yellow),
+    var(--gold),
+    var(--primary-yellow)
+  );
 }
 
 .footer-content {
@@ -1468,9 +1746,16 @@ section {
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  25% { transform: scale(1.2); }
-  50% { transform: scale(1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
 }
 
 /* ===== SCROLL TO TOP ===== */
@@ -1516,120 +1801,111 @@ section {
   transform: translateY(0);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== RESPONSIVE DESIGN (FINALIZED LOGIC) ===== */
 @media (max-width: 1024px) {
   .hero-title {
     font-size: 2.8rem;
   }
-  
+
   .about-content {
     grid-template-columns: 1fr;
   }
-  
+
   .contact-content {
     grid-template-columns: 1fr;
   }
-  
+
   .footer-content {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
+  /* Resetting testimonial card layout for tablet view */
   .testimonial-card {
-    flex: 0 0 calc(70% - var(--spacing-lg));
+    /* Allows roughly 2 cards visible with overflow scroll/swipe */
+    flex: 0 0 45%;
+    margin-right: var(--spacing-xl);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  /* Primary mobile menu breakpoint */
   .container {
     padding: 0 var(--spacing-md);
   }
-  
-  /* Mobile Menu */
+
+  /* Mobile Menu Toggle visibility */
   .mobile-menu-toggle {
     display: flex;
   }
-  
+
+  /* Navigation menu mobile style (from your successful fix snippet) */
   .nav-menu {
     position: fixed;
-    top: 80px;
-    left: -100%;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
+    top: 0;
+    right: -260px; /* Hidden position */
+    width: 250px; /* Menu width */
+    height: 100vh;
+    background: var(--white);
     flex-direction: column;
-    padding: var(--spacing-xl);
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition-base);
-    z-index: 999;
+    padding: 80px 20px; /* Push content down from top edge */
+    gap: 30px;
+    transition: right 0.35s ease-in-out;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+    z-index: 9998;
+    align-items: flex-start;
   }
-  
+
   .nav-menu.active {
-    left: 0;
+    right: 0;
   }
-  
-  .nav-link {
-    width: 100%;
-    text-align: center;
-    padding: var(--spacing-md);
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-  }
-  
+
   /* Hero */
   .hero-title {
     font-size: 2.2rem;
   }
-  
+
   .hero-description {
     font-size: 1rem;
   }
-  
+
   .hero-buttons {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .hero-stats {
     flex-direction: column;
     gap: var(--spacing-md);
   }
-  
+
   .stat-item {
     width: 100%;
   }
-  
+
   /* Sections */
   .section-title {
     font-size: 2rem;
   }
-  
+
   .services-grid,
   .portfolio-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .service-card.featured {
     transform: scale(1);
   }
-  
+
+  /* Testimonial: On smaller screens, force single card view for better swipe control */
   .testimonial-card {
-    flex: 0 0 calc(100% - var(--spacing-lg));
+    flex: 0 0 calc(100% - 20px);
+    margin-right: 20px;
   }
-  
+
   .footer-content {
     grid-template-columns: 1fr;
   }
-  
+
   .cta-buttons {
     flex-direction: column;
   }
@@ -1639,16 +1915,16 @@ section {
   .hero-title {
     font-size: 1.8rem;
   }
-  
+
   .btn {
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 0.9rem;
   }
-  
+
   .portfolio-grid {
     gap: var(--spacing-md);
   }
-  
+
   .portfolio-item {
     min-width: 100%;
   }
@@ -1683,42 +1959,78 @@ button:focus {
   }
 }
 .img-fluid {
-   max-width: 120px; 
-   height: auto;
-   display: block;
-   max-height: 60px;
-   width: auto;
+  max-width: 120px;
+  height: auto;
+  display: block;
+  max-height: 60px;
+  width: auto;
+}
+/* 1. FORCE containment on the image container */
+.about-image {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Critical: hides anything sticking out */
 }
 
-/* ===== MOBILE RESPONSIVE HEADER ===== */
+/* 2. Make .image-wrapper 100% width with no side effects */
+.image-wrapper {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+/* 3. FIX the decorative element so it NEVER leaks out */
+.image-decoration {
+  /* Keep it inside the parent */
+  top: -20px;
+  right: 0; /* ← Changed from -20px to 0 */
+  width: 150px; /* Slightly smaller on mobile */
+  height: 150px;
+  transform: translateX(30%); /* Simulate offset without breaking flow */
+}
+
+/* 4. Make the image TRULY responsive */
+.main-image {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
+  /* Remove any fixed height */
+}
+
+/* 5. On small screens, shrink decoration and ensure no overflow */
 @media (max-width: 768px) {
-
-  .nav-menu {
-    position: fixed;
-    top: 80px;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: var(--white);
-    box-shadow: var(--shadow-lg);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: var(--spacing-lg);
-    gap: var(--spacing-md);
-    transition: var(--transition-base);
-    z-index: 999;
+  .image-decoration {
+    width: 100px;
+    height: 100px;
+    top: -15px;
+    transform: translateX(25%);
   }
 
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .mobile-menu-toggle {
-    display: flex;
-  }
-
-  .header-content {
-    justify-content: space-between;
+  .main-image {
+    max-height: 300px;
   }
 }
 
+@media (max-width: 480px) {
+  .image-decoration {
+    display: none; /* Optional: hide on very small screens */
+  }
+}
+/* Add this near your base styles */
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Ensure container never exceeds viewport */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+  box-sizing: border-box;
+}
