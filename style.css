@@ -1355,6 +1355,7 @@ section {
 }
 
 /* ===== CONTACT SECTION ===== */
+/* ===== CONTACT SECTION ===== */
 .contact-section {
   background: var(--white);
   position: relative;
@@ -1367,12 +1368,9 @@ section {
   margin-top: var(--spacing-2xl);
 }
 
+/* Contact Info */
 .contact-info {
   padding: var(--spacing-lg);
-}
-
-.contact-intro {
-  margin-bottom: var(--spacing-xl);
 }
 
 .contact-intro h3 {
@@ -1388,61 +1386,23 @@ section {
   line-height: 1.8;
 }
 
+/* Contact Details */
 .contact-details {
   margin-bottom: var(--spacing-xl);
 }
-/* Ensure contact info never overflows on mobile */
-.contact-text h4,
-.contact-text p,
-.contact-text a {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  hyphens: auto;
-  line-height: 1.5;
-}
 
-/* Optional: Reduce font size slightly on very small screens */
-@media (max-width: 480px) {
-  .contact-text h4 {
-    font-size: 0.95rem;
-  }
-
-  .contact-text p,
-  .contact-text a {
-    font-size: 0.9rem;
-  }
-}
+/* Single source of truth for contact items */
 .contact-item {
   display: flex;
+  align-items: flex-start;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md);
   background: var(--light-yellow);
   border-radius: var(--radius-md);
   transition: var(--transition-base);
-}
-
-.contact-item:hover {
-  transform: translateX(10px);
-  box-shadow: var(--shadow-md);
-}
-/* ss */
-.contact-item {
-  display: flex;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background: var(--light-yellow);
-  border-radius: var(--radius-md);
-  transition: var(--transition-base);
-  align-items: flex-start; /* Important for multi-line text */
-  width: 100%; /* Prevent implicit width overflow */
+  width: 100%;
   box-sizing: border-box;
-}
-
-.contact-text {
-  flex: 1;
-  min-width: 0; /* Critical — allows text to wrap within flex item */
 }
 
 .contact-icon {
@@ -1458,66 +1418,37 @@ section {
   font-size: 1.2rem;
 }
 
+.contact-text {
+  flex: 1;
+  min-width: 0; /* Critical for wrapping */
+}
+
 .contact-text h4 {
   font-size: 1rem;
   color: var(--navy);
-  margin-bottom: var(--spacing-xs);
+  margin: 0 0 var(--spacing-xs) 0;
 }
 
-.contact-text p {
+.contact-text p,
+.contact-text a {
   font-size: 0.95rem;
   color: var(--gray);
   margin: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .contact-text a {
   color: var(--gold);
   font-weight: 500;
-  transition: var(--transition-base);
 }
-
 .contact-text a:hover {
   color: var(--primary-yellow);
   text-decoration: underline;
 }
 
-/* Allow long words like emails and URLs to break */
-.contact-text a,
-.contact-text p {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word; /* Optional: more aggressive break */
-  hyphens: auto;
-}
-/* Fix contact section overflow on mobile */
-@media (max-width: 900px) {
-  .contact-content {
-    grid-template-columns: 1fr !important;
-    gap: var(--spacing-xl);
-  }
-
-  .contact-info,
-  .contact-cta {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .cta-box {
-    width: 100%;
-  }
-
-  /* Ensure social/icons don’t overflow */
-  .social-icons {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: var(--spacing-md);
-  }
-
-  .social-icons a {
-    flex: 0 0 auto;
-  }
-}
-
+/* Social Links */
 .social-links h4 {
   font-size: 1.1rem;
   color: var(--navy);
@@ -1527,9 +1458,10 @@ section {
 .social-icons {
   display: flex;
   gap: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
-.social-icon {
+.social-icons a {
   width: 45px;
   height: 45px;
   background: linear-gradient(135deg, var(--primary-yellow), var(--gold));
@@ -1541,12 +1473,12 @@ section {
   font-size: 1.1rem;
   transition: var(--transition-base);
 }
-
-.social-icon:hover {
+.social-icons a:hover {
   transform: translateY(-5px) rotate(5deg);
   box-shadow: var(--shadow-lg);
 }
 
+/* CTA Boxes */
 .contact-cta {
   display: flex;
   flex-direction: column;
@@ -1561,6 +1493,8 @@ section {
   box-shadow: var(--shadow-md);
   transition: var(--transition-base);
   border: 2px solid transparent;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cta-box:hover {
@@ -1591,9 +1525,76 @@ section {
 
 .cta-buttons {
   display: flex;
-  gap: var(--spacing-md);
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.cta-buttons .btn {
+  width: 100%;
   justify-content: center;
-  flex-wrap: wrap;
+}
+
+/* 📱 MOBILE: Stack & Center */
+@media (max-width: 900px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  /* Mobile: icon on top, text centered */
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .contact-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .contact-text h4 {
+    font-size: 1.1rem;
+  }
+
+  .contact-text p,
+  .contact-text a {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* CTA centering */
+  .cta-box {
+    text-align: center;
+  }
+
+  .cta-box i {
+    display: block;
+    margin: 0 auto var(--spacing-md);
+  }
+
+  /* Reduce padding */
+  .contact-info,
+  .cta-box {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-info,
+  .cta-box {
+    padding: var(--spacing-sm);
+  }
+
+  .cta-box h3 {
+    font-size: 1.25rem;
+  }
+
+  .cta-box p {
+    font-size: 0.9rem;
+  }
 }
 
 /* ===== FOOTER ===== */
